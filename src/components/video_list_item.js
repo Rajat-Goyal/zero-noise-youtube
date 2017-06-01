@@ -3,7 +3,7 @@ import React from 'react';
 const VideoListItem = function(props) {
   const vid = props.video;
   return (
-      <li className="list-group-item">
+      <li className="list-group-item" onClick={() => props.onVideoSelect(vid)}>
         <div className="video-list media">
           <div className="media-left">
             <img className="media-object"

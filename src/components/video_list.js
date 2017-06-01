@@ -5,6 +5,7 @@ const VideoList = function(props) {
   const videolist = props.videos.map((video) => {
     return (
         <VideoListItem
+            onVideoSelect = {props.onVideoSelect}
             key={video.etag}
             video={video}
         />

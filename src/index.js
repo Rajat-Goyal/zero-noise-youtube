@@ -31,14 +31,21 @@ class App extends React.Component {
     this.searchVideo(newTerm);
   };
 
-  throttledSearch = _.debounce((nterm) => {this.searchTermChange(nterm)}, 300);
+  throttledSearch = _.debounce((nterm) => {this.searchTermChange(nterm)}, 5000);
+
+  onVideoSelect = (selectVideo) => {
+    this.setState({selectedVideo: selectVideo});
+  };
 
   render() {
     return (
         <div>
           <SearchBar onSearchTermChange = {this.throttledSearch} />
           <VideoDetail video={this.state.selectedVideo}/>
-          <VideoList videos={this.state.videos}/>
+          <VideoList
+              onVideoSelect = {this.onVideoSelect}
+              videos={this.state.videos}
+          />
         </div>
     );
   }
