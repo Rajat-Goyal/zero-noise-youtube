@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
+import _ from 'lodash';
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
 import VideoDetail from './components/video_detail';
@@ -26,14 +27,16 @@ class App extends React.Component {
     });
   };
 
-  searchTermChange = (newterm) => {
-    this.searchVideo(newterm);
+  searchTermChange = (newTerm) => {
+    this.searchVideo(newTerm);
   };
+
+  throttledSearch = _.debounce((nterm) => {this.searchTermChange(nterm)}, 300);
 
   render() {
     return (
         <div>
-          <SearchBar onSearchTermChange = {this.searchTermChange} />
+          <SearchBar onSearchTermChange = {this.throttledSearch} />
           <VideoDetail video={this.state.selectedVideo}/>
           <VideoList videos={this.state.videos}/>
         </div>
