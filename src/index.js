@@ -10,18 +10,31 @@ const API_KEY = 'AIzaSyAZbcHvfb7_T0IZc_822pRwWH1Nk0kVg04';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {videos: []};
-
-    YTSearch({key: API_KEY, term: 'react-redux'}, (videos) => {
-      this.setState({videos: videos});
-    });
+    this.state = {
+      videos: [],
+      selectedVideo: null
+    };
+    this.searchVideo("surfboards")
   }
+
+  searchVideo = (searchTerm) => {
+    YTSearch({key: API_KEY, term:searchTerm}, (videos) => {
+      this.setState({
+        videos: videos,
+        selectedVideo:videos[0]
+      });
+    });
+  };
+
+  searchTermChange = (newterm) => {
+    this.searchVideo(newterm);
+  };
 
   render() {
     return (
         <div>
-          <SearchBar/>
-          <VideoDetail video={this.state.videos[0]}/>
+          <SearchBar onSearchTermChange = {this.searchTermChange} />
+          <VideoDetail video={this.state.selectedVideo}/>
           <VideoList videos={this.state.videos}/>
         </div>
     );
