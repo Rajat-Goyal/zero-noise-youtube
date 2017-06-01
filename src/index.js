@@ -13,16 +13,16 @@ class App extends React.Component {
     super(props);
     this.state = {
       videos: [],
-      selectedVideo: null
+      selectedVideo: null,
     };
-    this.searchVideo("surfboards")
+    this.searchVideo('surfboards');
   }
 
   searchVideo = (searchTerm) => {
-    YTSearch({key: API_KEY, term:searchTerm}, (videos) => {
+    YTSearch({key: API_KEY, term: searchTerm}, (videos) => {
       this.setState({
         videos: videos,
-        selectedVideo:videos[0]
+        selectedVideo: videos[0],
       });
     });
   };
@@ -31,7 +31,9 @@ class App extends React.Component {
     this.searchVideo(newTerm);
   };
 
-  throttledSearch = _.debounce((nterm) => {this.searchTermChange(nterm)}, 300);
+  throttledSearch = _.debounce((nterm) => {
+    this.searchTermChange(nterm);
+  }, 300);
 
   onVideoSelect = (selectVideo) => {
     this.setState({selectedVideo: selectVideo});
@@ -40,10 +42,10 @@ class App extends React.Component {
   render() {
     return (
         <div>
-          <SearchBar onSearchTermChange = {this.throttledSearch} />
+          <SearchBar onSearchTermChange={this.throttledSearch}/>
           <VideoDetail video={this.state.selectedVideo}/>
           <VideoList
-              onVideoSelect = {this.onVideoSelect}
+              onVideoSelect={this.onVideoSelect}
               videos={this.state.videos}
           />
         </div>

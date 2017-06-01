@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VideoListItem = function(props) {
+const VideoListItem = (props) => {
   const vid = props.video;
   return (
       <li className="list-group-item" onClick={() => props.onVideoSelect(vid)}>
