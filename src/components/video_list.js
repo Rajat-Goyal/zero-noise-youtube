@@ -1,11 +1,13 @@
 import React from 'react';
+import VideoListItem from './video_list_item';
 
 const VideoList = function(props) {
   const videolist = props.videos.map((video) => {
     return (
-        <div key={video.etag}>
-          {video.etag}
-        </div>
+        <VideoListItem
+            key = {video.etag}
+            video = {video}
+        />
     );
   });
 
